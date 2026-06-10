@@ -252,6 +252,45 @@ body.flt{background:#f6f8fa!important;color:#111!important;}
 .ktr-btn{width:100%;margin-top:8px;padding:10px;background:rgba(37,99,235,.08);border:.5px solid rgba(37,99,235,.3);border-radius:9px;color:#60a5fa;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;}
 .ktr-btn svg{width:13px;height:13px;stroke:currentColor;}
 .ktr-badge{display:inline-block;background:rgba(212,175,55,.12);border:.5px solid rgba(212,175,55,.3);border-radius:20px;padding:3px 10px;font-size:10px;color:var(--cg);margin-bottom:8px;}
+
+/* -- ACHIEVEMENT KAD -- */
+.ach-ov{position:fixed;inset:0;background:rgba(6,10,18,.96);z-index:101;display:none;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(8px);}
+.ach-c{background:linear-gradient(160deg,#0d1a2e 0%,#1c2b4a 60%,#0d1a2e 100%);border-radius:20px;padding:28px 20px;border:1.5px solid #d4af37;max-width:340px;width:100%;text-align:center;position:relative;animation:obIn .35s ease;}
+.ach-c::before{content:'';position:absolute;inset:5px;border-radius:15px;border:.5px solid rgba(212,175,55,.25);pointer-events:none;}
+.ach-stars{font-size:18px;color:#d4af37;letter-spacing:10px;margin-bottom:10px;}
+.ach-ar{font-family:'Amiri',serif;font-size:30px;color:#d4af37;direction:rtl;margin-bottom:6px;}
+.ach-t{font-size:22px;font-weight:700;color:#fff;margin-bottom:3px;}
+.ach-sub{font-size:12px;color:#8aaccc;margin-bottom:16px;line-height:1.6;}
+.ach-nm{font-size:20px;font-weight:600;color:#d4af37;margin-bottom:4px;}
+.ach-dt{font-size:11px;color:#6a88a6;margin-bottom:4px;}
+.ach-br{font-size:9px;color:rgba(212,175,55,.45);margin-bottom:20px;letter-spacing:.5px;}
+.ach-btns{display:flex;flex-direction:column;gap:7px;}
+.ach-share{padding:13px;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;}
+.ach-dl{padding:10px;background:rgba(212,175,55,.1);border:.5px solid rgba(212,175,55,.35);color:#d4af37;border-radius:10px;font-size:12px;cursor:pointer;}
+.ach-cl2{padding:8px;background:none;border:.5px solid rgba(255,255,255,.08);color:#6a88a6;border-radius:10px;font-size:12px;cursor:pointer;}
+.kad-btn{width:100%;padding:11px;background:linear-gradient(135deg,rgba(212,175,55,.12),rgba(212,175,55,.06));border:.5px solid rgba(212,175,55,.35);border-radius:9px;color:var(--cg);font-size:12px;font-weight:500;cursor:pointer;margin-bottom:8px;display:none;}
+/* -- TETAPAN WAKTU -- */
+.cfg-ov{position:fixed;inset:0;background:rgba(6,10,18,.85);z-index:100;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);}
+.cfg-c{background:var(--cn);border-radius:16px;padding:22px 18px;border:.5px solid rgba(212,175,55,.3);max-width:300px;width:100%;animation:obIn .22s ease;}
+.cfg-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.cfg-ht{font-size:14px;font-weight:600;color:var(--cg);}
+.cfg-cl{background:none;border:none;color:var(--t2);cursor:pointer;font-size:20px;line-height:1;}
+.cfg-note{font-size:11px;color:#6a88a6;margin-bottom:14px;line-height:1.6;background:rgba(212,175,55,.06);padding:8px 10px;border-radius:7px;border:.5px solid rgba(212,175,55,.12);}
+.cfg-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px;}
+.cfg-row label{font-size:13px;color:var(--tx);}
+.cfg-ti{padding:9px 12px;border:.5px solid var(--bd);border-radius:8px;background:var(--b0);color:var(--tx);font-size:15px;outline:none;width:130px;}
+.cfg-ti:focus{border-color:var(--cg);}
+.cfg-btns{display:flex;gap:8px;margin-top:4px;}
+.cfg-rst{flex:1;padding:11px;border:.5px solid var(--bd);border-radius:8px;background:none;color:var(--t2);font-size:12px;cursor:pointer;}
+.cfg-sv{flex:2;padding:11px;background:var(--cg);color:var(--cn);border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;}
+/* -- LOG SEJARAH -- */
+.log-wrap{background:var(--b1);border-radius:8px;margin-bottom:10px;border:.5px solid var(--bd);overflow:hidden;}
+.log-hd{width:100%;padding:11px 14px;background:none;border:none;color:var(--t2);font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;font-weight:500;}
+.log-hd svg{width:14px;height:14px;stroke:currentColor;flex-shrink:0;}
+.log-arr{margin-left:auto;font-size:10px;transition:transform .2s;}
+.log-item{padding:9px 14px;border-top:.5px solid var(--bd);display:flex;justify-content:space-between;align-items:center;}
+.log-ses{font-size:12px;color:var(--tx);font-weight:500;}
+.log-inf{font-size:10px;color:var(--t2);text-align:right;}
 .rstb{width:100%;margin-top:4px;padding:8px;border:.5px solid var(--bd);border-radius:8px;background:none;color:var(--t2);font-size:11px;cursor:pointer;}
 </style>
 </head>
@@ -311,6 +350,7 @@ body.flt{background:#f6f8fa!important;color:#111!important;}
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       <span id="usrName">&#x2014;</span>
     </div>
+    <button class="hbt" onclick="showCfg()"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" style="width:14px;height:14px;stroke:var(--cg)"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
     <button class="hbt" onclick="tgMute()" id="muteB">
       <svg id="muteI" viewBox="0 0 24 24" fill="none" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
     </button>
@@ -454,7 +494,9 @@ body.flt{background:#f6f8fa!important;color:#111!important;}
       Hantar ke sistem guru
     </button>
   </div>
-  <div class="chwp"><div class="sh" style="margin-bottom:8px;">Kemajuan mingguan (M1&#x2013;M6)</div><div id="bChart"></div></div>
+  <button class="kad-btn" id="kadBtn" onclick="showAch()">&#x2736; Lihat Kad Pencapaian 41 Hari</button>
+<div class="log-wrap"><button class="log-hd" onclick="togLog()"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Sejarah Sesi Wirid<span class="log-arr" id="logArr">&#x25BE;</span></button><div id="logList" style="display:none;"></div></div>
+<div class="chwp"><div class="sh" style="margin-bottom:8px;">Kemajuan mingguan (M1&#x2013;M6)</div><div id="bChart"></div></div>
   <div class="sh">Peta kemajuan 41 hari <span style="font-size:10px;color:var(--t2)">(Ketik sel untuk status)</span></div>
   <div class="hmwp"><div class="hmap" id="hmap"></div><div class="hm-tp" id="hmTp"></div></div>
   <div class="h4lgd">
@@ -491,6 +533,38 @@ body.flt{background:#f6f8fa!important;color:#111!important;}
         <option value="&#x623;&#x64e;&#x633;&#x652;&#x62a;&#x64e;&#x63a;&#x652;&#x641;&#x650;&#x631;&#x64f; &#x627;&#x644;&#x644;&#x651;&#x64e;&#x647;&#x64e;">Astaghfirullah</option>
         <option value="&#x635;&#x64e;&#x644;&#x651;&#x650; &#x627;&#x644;&#x644;&#x651;&#x64e;&#x647;&#x64f; &#x639;&#x64e;&#x644;&#x64e;&#x64a;&#x652;&#x647;&#x650; &#x648;&#x64e;&#x633;&#x64e;&#x644;&#x651;&#x64e;&#x645;&#x64e;">Selawat</option>
       </select>
+    </div>
+  </div>
+</div>
+
+<div class="ach-ov" id="achOv">
+  <div class="ach-c">
+    <div class="ach-stars">&#x2736; &#x2736; &#x2736;</div>
+    <div class="ach-ar">&#x627;&#x64e;&#x644;&#x652;&#x62d;&#x64e;&#x645;&#x652;&#x62f;&#x64f; &#x644;&#x650;&#x644;&#x651;&#x64e;&#x647;&#x650;</div>
+    <div class="ach-t">Tahniah!</div>
+    <div class="ach-sub">Mujahadah 41 Hari Selesai<br>Sri Gayong Panglima Ulung</div>
+    <div class="ach-nm" id="achNm"></div>
+    <div class="ach-dt" id="achDt"></div>
+    <div class="ach-br">Wirid 700 &middot; Sri Gayong Panglima Ulung</div>
+    <div class="ach-btns">
+      <button class="ach-share" onclick="shareKad()">Kongsi ke WhatsApp / Media Sosial</button>
+      <button class="ach-dl" onclick="muatTurunKad()">Simpan sebagai Imej</button>
+      <button class="ach-cl2" onclick="tutupAch()">Tutup</button>
+    </div>
+  </div>
+</div>
+<div class="cfg-ov" id="cfgOv">
+  <div class="cfg-c">
+    <div class="cfg-hd">
+      <span class="cfg-ht">Tetapan Waktu Solat</span>
+      <button class="cfg-cl" onclick="tutupCfg()">&#x2715;</button>
+    </div>
+    <div class="cfg-note">App guna GPS automatik. Isi manual jika lokasi tidak tepat atau GPS tidak aktif.</div>
+    <div class="cfg-row"><label>Waktu Subuh</label><input type="time" id="cfgFajr" class="cfg-ti"></div>
+    <div class="cfg-row"><label>Waktu Asar</label><input type="time" id="cfgAsar" class="cfg-ti"></div>
+    <div class="cfg-btns">
+      <button class="cfg-rst" onclick="resetCfg()">GPS Auto</button>
+      <button class="cfg-sv" onclick="saveCfg()">Simpan</button>
     </div>
   </div>
 </div>
@@ -633,6 +707,7 @@ function calcPT(lat,lng){
 }
 function d2t(d){const h=Math.floor(d)%24,m=Math.floor((d%1)*60);return h.toString().padStart(2,'0')+':'+m.toString().padStart(2,'0');}
 function updatePTDisplay(){
+  var _m=localStorage.getItem('w700_ptm');if(_m){try{var _mp=JSON.parse(_m);PT={fajr:_mp.fajr,asr:_mp.asar,dhuhr:12};}catch(_e){}}
   if(!PT)return;
   document.getElementById('fajrT').textContent=d2t(PT.fajr);
   document.getElementById('asarT').textContent=d2t(PT.asr);
@@ -733,7 +808,7 @@ function showToast(msg,col){
 function gT(n){
   [0,1,2].forEach(i=>{document.getElementById('tb'+i).classList.toggle('ak',i===n);document.getElementById('s'+i).classList.remove('on');});
   const sc=document.getElementById('s'+n);void sc.offsetWidth;sc.classList.add('on');
-  if(n===0){rHome();checkReminder();}if(n===1)updateSessionBadge();if(n===2)r41();
+  if(n===0){rHome();checkReminder();}if(n===1)updateSessionBadge();if(n===2){r41();var _kb2=document.getElementById('kadBtn');if(_kb2){var _cf=calc();_kb2.style.display=_cf.fl>=41?'block':'none';}}
 }
 
 // ─── STATS ────────────────────────────────────────
@@ -806,9 +881,9 @@ function mW(){
 function sambung(){
   if(!savedProg)return;
   pi=savedProg.pi;cnt=savedProg.cnt;adv=false;
-  document.getElementById('cntDiv').style.display='none';rW();
+  document.getElementById('cntDiv').style.display='none';reqWL();rW();
 }
-function mulaSemula(){pi=0;cnt=0;adv=false;document.getElementById('cntDiv').style.display='none';document.getElementById('wP').style.display='none';document.getElementById('wA').style.display='block';document.getElementById('wD').style.display='none';rW();}
+function mulaSemula(){pi=0;cnt=0;adv=false;document.getElementById('cntDiv').style.display='none';document.getElementById('wP').style.display='none';document.getElementById('wA').style.display='block';document.getElementById('wD').style.display='none';reqWL();rW();}
 
 // Save/load progress
 function saveProg(){try{localStorage.setItem('w700_prog',JSON.stringify({pi,cnt,ses,ts:Date.now()}));}catch(e){}}
@@ -845,7 +920,7 @@ function tap(){
 }
 function nxP(){pi++;cnt=0;saveProg();rW();}
 function ulg(){cnt=0;adv=false;rW();}
-function klrW(){saveProg();document.getElementById('wP').style.display='block';document.getElementById('wA').style.display='none';document.getElementById('wD').style.display='none';}
+function klrW(){saveProg();relWL();document.getElementById('wP').style.display='block';document.getElementById('wA').style.display='none';document.getElementById('wD').style.display='none';}
 
 function selesai(){
   const td=today();if(!D[td])D[td]={p:0,pt:0};
@@ -859,7 +934,7 @@ function selesai(){
   ting('sesi');vib();
   if(both)showToast('MasyaAllah! Hari ke-'+td+' \u2014 Kedua-dua sidang lengkap!','#b45309');
   else showToast((ses==='pagi'?'Sidang Pagi':'Sidang Petang')+' Hari ke-'+td+' direkodkan!');
-  syncGAS('sync',{selesai:both||td>=41,gagal:false});
+  relWL();logSesi(ses,td);syncGAS('sync',{selesai:both||td>=41,gagal:false});if(td>=41&&both){var _kb=document.getElementById('kadBtn');if(_kb)_kb.style.display='block';setTimeout(showAch,1500);}
   if(both&&Notification.permission==='granted')sendNotif('Wirid 700 \u2714','MasyaAllah! Hari ke-'+td+' lengkap!');
 }
 
@@ -988,6 +1063,112 @@ function kitaranBaru(){
   localStorage.removeItem('w700_prog');
   sv();rAll();loadKitaran();
   showToast('Mujahadah Kitaran ke-'+(k+1)+' bermula. BismiLlah!','#2563eb');
+}
+
+// --- WAKE LOCK ---
+var _wl=null;
+async function reqWL(){try{if('wakeLock' in navigator){_wl=await navigator.wakeLock.request('screen');}}catch(e){}}
+function relWL(){try{if(_wl){_wl.release();_wl=null;}}catch(e){}}
+document.addEventListener('visibilitychange',async function(){if(_wl!==null&&document.visibilityState==='visible')await reqWL();});
+
+// --- KAD PENCAPAIAN ---
+function showAch(){
+  var nm=localStorage.getItem('w700_nama')||'';
+  document.getElementById('achNm').textContent=nm;
+  document.getElementById('achDt').textContent=new Date().toLocaleDateString('ms-MY',{day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('achOv').style.display='flex';
+}
+function tutupAch(){document.getElementById('achOv').style.display='none';}
+function genKad(){
+  var cv=document.createElement('canvas');cv.width=900;cv.height=500;
+  var c=cv.getContext('2d');
+  var g=c.createLinearGradient(0,0,900,500);
+  g.addColorStop(0,'#0a1020');g.addColorStop(.5,'#1c2b4a');g.addColorStop(1,'#0a1020');
+  c.fillStyle=g;c.fillRect(0,0,900,500);
+  c.strokeStyle='#d4af37';c.lineWidth=4;c.strokeRect(14,14,872,472);
+  c.strokeStyle='rgba(212,175,55,.3)';c.lineWidth=1;c.strokeRect(26,26,848,448);
+  c.fillStyle='#d4af37';c.font='bold 24px serif';c.textAlign='center';
+  c.fillText('✶   ✶   ✶',450,68);
+  c.font='bold 48px serif';
+  c.fillText('اَلْحَمْدُ لِلَّهِ',450,144);
+  c.fillStyle='#ffffff';c.font='bold 30px sans-serif';
+  c.fillText('Tahniah! Mujahadah 41 Hari Selesai',450,210);
+  var nm=localStorage.getItem('w700_nama')||'Ahli';
+  c.fillStyle='#d4af37';c.font='bold 26px sans-serif';c.fillText(nm,450,264);
+  c.fillStyle='#8aaccc';c.font='20px sans-serif';
+  c.fillText(new Date().toLocaleDateString('ms-MY',{day:'numeric',month:'long',year:'numeric'}),450,312);
+  c.strokeStyle='rgba(212,175,55,.3)';c.beginPath();c.moveTo(200,356);c.lineTo(700,356);c.stroke();
+  c.fillStyle='rgba(212,175,55,.5)';c.font='16px sans-serif';
+  c.fillText('Sri Gayong Panglima Ulung  |  Wirid 700',450,400);
+  return cv;
+}
+async function shareKad(){
+  var nm=localStorage.getItem('w700_nama')||'Ahli';
+  var msg='Alhamdulillah, saya '+nm+' telah selesai Mujahadah 41 Hari Sri Gayong Panglima Ulung.';
+  try{
+    var cv=genKad();
+    cv.toBlob(async function(blob){
+      var file=new File([blob],'wirid700.png',{type:'image/png'});
+      if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
+        await navigator.share({title:'Wirid 700',text:msg,files:[file]});
+      } else if(navigator.share){
+        await navigator.share({title:'Wirid 700',text:msg,url:window.location.href});
+      } else {
+        var a=document.createElement('a');a.href=cv.toDataURL();a.download='wirid700-selesai.png';a.click();
+      }
+    });
+  }catch(e){showToast('Guna butang Simpan Imej.');}
+}
+function muatTurunKad(){
+  try{var cv=genKad();var a=document.createElement('a');a.href=cv.toDataURL();a.download='wirid700-selesai.png';a.click();}
+  catch(e){showToast('Gagal jana imej.');}
+}
+
+// --- TETAPAN WAKTU SOLAT ---
+function t2d(ts){var p=ts.split(':').map(Number);return p[0]+p[1]/60;}
+function showCfg(){
+  var mpt=localStorage.getItem('w700_ptm');
+  if(mpt){try{var mp=JSON.parse(mpt);document.getElementById('cfgFajr').value=d2t(mp.fajr);document.getElementById('cfgAsar').value=d2t(mp.asar);}catch(e){}}
+  else if(PT){document.getElementById('cfgFajr').value=d2t(PT.fajr);document.getElementById('cfgAsar').value=d2t(PT.asr);}
+  document.getElementById('cfgOv').style.display='flex';
+}
+function tutupCfg(){document.getElementById('cfgOv').style.display='none';}
+function saveCfg(){
+  var fv=document.getElementById('cfgFajr').value,av=document.getElementById('cfgAsar').value;
+  if(!fv||!av){showToast('Sila isi kedua-dua waktu.','#dc2626');return;}
+  var mp={fajr:t2d(fv),asar:t2d(av)};
+  localStorage.setItem('w700_ptm',JSON.stringify(mp));
+  PT={fajr:mp.fajr,asr:mp.asar,dhuhr:12};
+  updatePTDisplay();tutupCfg();showToast('Waktu solat manual disimpan.');
+}
+function resetCfg(){
+  localStorage.removeItem('w700_ptm');
+  if(navigator.geolocation){navigator.geolocation.getCurrentPosition(function(p){PT=calcPT(p.coords.latitude,p.coords.longitude);updatePTDisplay();},function(){PT=calcPT(userLat,userLng);updatePTDisplay();});}
+  else{PT=calcPT(userLat,userLng);updatePTDisplay();}
+  tutupCfg();showToast('Guna waktu GPS automatik.');
+}
+
+// --- LOG SEJARAH ---
+function logSesi(s,hari){
+  try{
+    var log=JSON.parse(localStorage.getItem('w700_log')||'[]');
+    log.unshift({ses:s,hari:hari,tarikh:new Date().toLocaleDateString('ms-MY'),masa:new Date().toLocaleTimeString('ms-MY',{hour:'2-digit',minute:'2-digit'})});
+    localStorage.setItem('w700_log',JSON.stringify(log.slice(0,50)));
+  }catch(e){}
+}
+function togLog(){
+  var el=document.getElementById('logList'),arr=document.getElementById('logArr');
+  if(el.style.display==='none'){el.style.display='block';arr.style.transform='rotate(180deg)';rLog();}
+  else{el.style.display='none';arr.style.transform='';}
+}
+function rLog(){
+  try{
+    var log=JSON.parse(localStorage.getItem('w700_log')||'[]');
+    if(!log.length){document.getElementById('logList').innerHTML='<div style="padding:12px 14px;font-size:12px;color:var(--t2)">Tiada rekod lagi.</div>';return;}
+    document.getElementById('logList').innerHTML=log.map(function(l){
+      return '<div class="log-item"><div class="log-ses">'+(l.ses==='pagi'?'Sidang Pagi':'Sidang Petang')+'<br><span style="font-size:10px;font-weight:400;color:var(--t2)">Hari ke-'+l.hari+'</span></div><div class="log-inf">'+l.tarikh+'<br>'+l.masa+'</div></div>';
+    }).join('');
+  }catch(e){}
 }
 // ─── AUDIO & VIBRATE ──────────────────────────────
 function ting(jenis='biasa'){
