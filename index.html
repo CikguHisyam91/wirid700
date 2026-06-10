@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Wirid 700">
 <meta name="theme-color" content="#1c2b4a">
-<title>Wirid 700 &#x2014; Sri Gayong Panglima Ulung</title>
+<title>Wirid 700 &#x2014; Sri Gayung Panglima Ulung</title>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon.svg">
@@ -141,12 +141,37 @@ body.flt{background:#f6f8fa!important;color:#111!important;}
 .cnt-wr{text-align:center;padding:6px 0 10px;}
 .cnt-n{font-size:64px;font-weight:500;color:var(--tx);line-height:1;}
 .cnt-t{font-size:13px;color:var(--t2);margin-top:2px;}
-.wact{width:100%;padding:16px;border:none;border-radius:10px;font-size:16px;font-weight:500;cursor:pointer;margin-bottom:8px;}
-.w-tp{background:var(--cp);color:#fff;}
-.w-nx{background:var(--ce);color:#fff;}
-.w-dn{background:#065f46;color:#6ee7b7;}
-.wrow{display:flex;gap:8px;}
-.wsm{flex:1;padding:8px;border:.5px solid var(--bd);border-radius:8px;background:none;color:var(--t2);font-size:12px;cursor:pointer;}
+/* ── TOOLBAR ATAS (jauh dari butang zikir) ── */
+.wtb{display:flex;gap:6px;margin-bottom:10px;}
+.wtb-b{flex:1;padding:9px 4px;border:.5px solid var(--bd);border-radius:9px;background:var(--b1);color:var(--t2);font-size:10px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:all .15s;-webkit-tap-highlight-color:transparent;}
+.wtb-b svg{width:15px;height:15px;stroke:currentColor;}
+.wtb-b:active{transform:scale(.93);}
+.wtb-b.dgr{color:#ef4444;border-color:rgba(239,68,68,.3);}
+/* ── BUTANG ZIKIR PREMIUM ── */
+.wact{width:100%;border:none;border-radius:18px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;position:relative;overflow:hidden;}
+.w-tp{margin-top:18px;padding:30px 16px;font-size:18px;letter-spacing:.5px;color:#fff;
+  background:linear-gradient(135deg,#8b5cf6 0%,#7c3aed 45%,#6d28d9 100%);
+  box-shadow:0 8px 28px rgba(124,58,237,.45),inset 0 1px 0 rgba(255,255,255,.25),inset 0 -3px 0 rgba(0,0,0,.18);}
+.w-tp:active{box-shadow:0 3px 12px rgba(124,58,237,.4),inset 0 1px 0 rgba(255,255,255,.15),inset 0 3px 6px rgba(0,0,0,.2);}
+.w-nx{margin-top:18px;padding:24px 16px;font-size:17px;color:#fff;
+  background:linear-gradient(135deg,#10b981 0%,#059669 50%,#047857 100%);
+  box-shadow:0 8px 28px rgba(5,150,105,.4),inset 0 1px 0 rgba(255,255,255,.25),inset 0 -3px 0 rgba(0,0,0,.15);}
+.w-dn{margin-top:18px;padding:30px 16px;font-size:18px;
+  background:linear-gradient(135deg,#065f46,#047857);color:#6ee7b7;
+  box-shadow:0 6px 20px rgba(5,150,105,.35);}
+.wact::after{content:'';position:absolute;top:0;left:-80%;width:50%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
+  transform:skewX(-20deg);animation:shine 3.2s ease-in-out infinite;}
+@keyframes shine{0%,60%{left:-80%;}100%{left:130%;}}
+/* ── MODAL CONFIRM KELUAR ── */
+.cf-ov{display:none;position:fixed;inset:0;background:rgba(6,10,18,.72);z-index:90;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(3px);}
+.cf-c{background:var(--cn);border-radius:16px;padding:24px 20px;border:.5px solid rgba(212,175,55,.35);max-width:320px;width:100%;text-align:center;animation:obIn .22s ease;}
+.cf-t{font-size:16px;font-weight:600;color:#fff;margin-bottom:6px;}
+.cf-s{font-size:12px;color:#8aaccc;line-height:1.7;margin-bottom:18px;}
+.cf-r{display:flex;gap:8px;}
+.cf-b{flex:1;padding:12px;border:none;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;}
+.cf-y{background:rgba(239,68,68,.14);color:#f87171;border:.5px solid rgba(239,68,68,.4);}
+.cf-n{background:var(--cg);color:var(--cn);}
 .wdov{background:var(--cn);border-radius:12px;padding:20px;text-align:center;margin-bottom:10px;border:.5px solid rgba(212,175,55,.3);}
 .wdov-ar{font-size:24px;font-family:'Amiri',serif;color:var(--cg);direction:rtl;margin-bottom:6px;}
 .wdov-t{font-size:16px;font-weight:500;color:#fff;margin-bottom:4px;}
@@ -354,6 +379,20 @@ body.flt{background:#f6f8fa!important;color:#111!important;}
         </div>
       </div>
     </div>
+    <div class="wtb">
+      <button class="wtb-b" onclick="prevP()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Sebelum
+      </button>
+      <button class="wtb-b" onclick="ulg()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>Ulang
+      </button>
+      <button class="wtb-b" onclick="showNav()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Lompat
+      </button>
+      <button class="wtb-b dgr" onclick="confirmKeluar()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Keluar
+      </button>
+    </div>
     <div class="wrp"><div class="wrm"><span id="wPL"></span><span id="wSL"></span></div><div class="wrt"><div class="wrf" id="wPF"></div></div></div>
     <div class="w-bdg" id="wBdg"></div>
     <div class="wsub" id="wSub"></div>
@@ -368,7 +407,7 @@ body.flt{background:#f6f8fa!important;color:#111!important;}
       </div>
       <div class="wnav-grid" id="wNavGrid"></div>
     </div>
-    <div class="wrow"><button class="wsm" onclick="prevP()">&#x2190; Sebelum</button><button class="wsm" onclick="ulg()">&#x21BA; Ulang</button><button class="wsm" onclick="showNav()">&#x2630; Lompat</button><button class="wsm" onclick="klrW()">&#x2715; Keluar</button></div>
+
   </div>
   <div id="wD" style="display:none;">
     <div class="wdov">
@@ -407,6 +446,19 @@ body.flt{background:#f6f8fa!important;color:#111!important;}
   <button class="rstb" id="rstB" onclick="rstAll()">Padam semua data 41 hari</button>
 </div>
 </div><!-- /main -->
+
+<!-- Modal confirm keluar -->
+<div class="cf-ov" id="cfOv">
+  <div class="cf-c">
+    <div class="cf-t">Keluar dari sesi wirid?</div>
+    <div class="cf-s">Kemajuan anda disimpan secara automatik.<br>Anda boleh sambung semula bila-bila masa.</div>
+    <div class="cf-r">
+      <button class="cf-b cf-y" onclick="keluarYa()">Ya, keluar</button>
+      <button class="cf-b cf-n" onclick="keluarTak()">Teruskan wirid</button>
+    </div>
+  </div>
+</div>
+
 </div><!-- /ap -->
 <script>
 // ═══════════════════════════════════════
@@ -799,6 +851,11 @@ function rstAll(){
 }
 
 
+
+// ─── CONFIRM KELUAR ───────────────────────────────────────────
+function confirmKeluar(){document.getElementById('cfOv').style.display='flex';}
+function keluarYa(){document.getElementById('cfOv').style.display='none';klrW();}
+function keluarTak(){document.getElementById('cfOv').style.display='none';}
 // ─── NAVIGASI WIRID ───────────────────────────────────────────
 function prevP(){
   if(pi<=0){showToast('Ini wirid pertama.');return;}
