@@ -232,6 +232,26 @@ body.flt{background:#f6f8fa!important;color:#111!important;}
 .wni.don{background:rgba(5,150,105,.08);border-color:rgba(5,150,105,.3);}
 .wni.don .wni-n{color:var(--ce);}
 .wni.don .wni-l{color:rgba(5,150,105,.7);}
+
+/* ── TASBIH ── */
+.tsb-btn{width:100%;margin-top:10px;padding:11px 14px;background:rgba(212,175,55,.09);border:.5px solid rgba(212,175,55,.28);border-radius:10px;color:var(--cg);font-size:12px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;}
+.tsb-btn svg{width:15px;height:15px;stroke:currentColor;}
+.tsb-ov{position:fixed;inset:0;background:rgba(6,10,18,.92);z-index:100;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px);}
+.tsb-c{background:var(--cn);border-radius:20px;padding:26px 20px;border:.5px solid rgba(212,175,55,.35);width:100%;max-width:320px;text-align:center;animation:obIn .22s ease;}
+.tsb-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+.tsb-ht{font-size:14px;font-weight:600;color:var(--cg);}
+.tsb-cl{background:none;border:none;color:var(--t2);cursor:pointer;font-size:22px;line-height:1;padding:0 4px;}
+.tsb-n{font-size:90px;font-weight:700;color:#fff;line-height:1;margin-bottom:3px;font-variant-numeric:tabular-nums;}
+.tsb-zn{font-size:13px;color:#8aaccc;margin-bottom:20px;font-family:'Amiri',serif;}
+.tsb-tap{width:100%;padding:28px;background:linear-gradient(135deg,#d4af37 0%,#b45309 100%);color:#1c2b4a;border:none;border-radius:16px;font-size:19px;font-weight:700;cursor:pointer;margin-bottom:12px;box-shadow:0 6px 22px rgba(212,175,55,.38),inset 0 1px 0 rgba(255,255,255,.3);}
+.tsb-tap:active{transform:scale(.97);}
+.tsb-row{display:flex;gap:8px;}
+.tsb-rst{flex:1;padding:10px;border:.5px solid var(--bd);border-radius:8px;background:none;color:var(--t2);font-size:12px;cursor:pointer;}
+.tsb-sel{flex:2;padding:9px;border:.5px solid var(--bd);border-radius:8px;background:var(--b0);color:var(--tx);font-size:11px;outline:none;}
+/* ── KITARAN ── */
+.ktr-btn{width:100%;margin-top:8px;padding:10px;background:rgba(37,99,235,.08);border:.5px solid rgba(37,99,235,.3);border-radius:9px;color:#60a5fa;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;}
+.ktr-btn svg{width:13px;height:13px;stroke:currentColor;}
+.ktr-badge{display:inline-block;background:rgba(212,175,55,.12);border:.5px solid rgba(212,175,55,.3);border-radius:20px;padding:3px 10px;font-size:10px;color:var(--cg);margin-bottom:8px;}
 .rstb{width:100%;margin-top:4px;padding:8px;border:.5px solid var(--bd);border-radius:8px;background:none;color:var(--t2);font-size:11px;cursor:pointer;}
 </style>
 </head>
@@ -256,7 +276,7 @@ body.flt{background:#f6f8fa!important;color:#111!important;}
     <div class="reg-c">
       <div class="reg-ar">&#x628;&#x650;&#x633;&#x652;&#x645;&#x650; &#x627;&#x644;&#x644;&#x651;&#x64e;&#x647;&#x650; &#x627;&#x644;&#x631;&#x651;&#x64e;&#x62d;&#x652;&#x645;&#x64e;&#x646;&#x650; &#x627;&#x644;&#x631;&#x651;&#x64e;&#x62d;&#x650;&#x64a;&#x652;&#x645;&#x650;</div>
       <div class="reg-ttl">Wirid 700</div>
-      <div class="reg-sub">Sri Gayung Panglima Ulung</div>
+      <div class="reg-sub">Sri Gayong Panglima Ulung</div>
       <div style="text-align:left">
         <div class="reg-lbl">Nama penuh ahli:</div>
         <input type="text" id="regNama" class="reg-inp" placeholder="Contoh: Muhammad Hisyam" autocomplete="name" maxlength="50">
@@ -284,7 +304,7 @@ body.flt{background:#f6f8fa!important;color:#111!important;}
 <div class="hdr">
   <div>
     <div class="hl-ar">&#x648;&#x650;&#x631;&#x650;&#x62f;&#x652; &#x37;&#x30;&#x30;</div>
-    <div class="hl-nm">Sri Gayung Panglima Ulung &nbsp;&middot;&nbsp; Hari ke-<span id="hdD">&#x2014;</span> / 41</div>
+    <div class="hl-nm">Sri Gayong Panglima Ulung &nbsp;&middot;&nbsp; Hari ke-<span id="hdD">&#x2014;</span> / 41</div>
   </div>
   <div class="hbts">
     <div class="usr-chip" id="usrChip">
@@ -443,7 +463,36 @@ body.flt{background:#f6f8fa!important;color:#111!important;}
     <div class="li"><div class="ldot" style="border:2px solid #d4af37;background:transparent"></div>Hari semasa</div>
   </div>
   <div class="gr41" id="gr41"></div>
-  <button class="rstb" id="rstB" onclick="rstAll()">Padam semua data 41 hari</button>
+  <div style="text-align:center;margin-top:10px"><div class="ktr-badge">Mujahadah Kitaran ke-<span id="ktrN">1</span></div></div>
+<button class="ktr-btn" onclick="kitaranBaru()">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+  Mulakan Mujahadah Kitaran Baru
+</button>
+<button class="rstb" id="rstB" onclick="rstAll()">Padam semua data 41 hari</button>
+</div>
+
+<!-- Tasbih Bebas Modal -->
+<div class="tsb-ov" id="tsbOv">
+  <div class="tsb-c">
+    <div class="tsb-hd">
+      <span class="tsb-ht">Tasbih Bebas</span>
+      <button class="tsb-cl" onclick="tutupTasbih()">&#x2715;</button>
+    </div>
+    <div class="tsb-n" id="tsbN">0</div>
+    <div class="tsb-zn" id="tsbZn">&#x633;&#x64f;&#x628;&#x652;&#x62d;&#x64e;&#x627;&#x646;&#x64e; &#x627;&#x644;&#x644;&#x651;&#x64e;&#x647;&#x650;</div>
+    <button class="tsb-tap" onclick="tsbTap()">TEKAN</button>
+    <div class="tsb-row">
+      <button class="tsb-rst" onclick="tsbReset()">&#x21BA; Reset</button>
+      <select class="tsb-sel" id="tsbSel" onchange="tsbChg()">
+        <option value="&#x633;&#x64f;&#x628;&#x652;&#x62d;&#x64e;&#x627;&#x646;&#x64e; &#x627;&#x644;&#x644;&#x651;&#x64e;&#x647;&#x650;">Subhanallah</option>
+        <option value="&#x627;&#x64e;&#x644;&#x652;&#x62d;&#x64e;&#x645;&#x652;&#x62f;&#x64f; &#x644;&#x650;&#x644;&#x651;&#x64e;&#x647;&#x650;">Alhamdulillah</option>
+        <option value="&#x627;&#x64e;&#x644;&#x644;&#x651;&#x64e;&#x647;&#x64f; &#x623;&#x64e;&#x643;&#x652;&#x628;&#x64e;&#x631;&#x64f;">Allahuakbar</option>
+        <option value="&#x644;&#x64e;&#x627; &#x625;&#x650;&#x644;&#x64e;&#x647;&#x64e; &#x625;&#x650;&#x644;&#x651;&#x64e;&#x627; &#x627;&#x644;&#x644;&#x651;&#x64e;&#x647;&#x64f;">Laa ilaha illallah</option>
+        <option value="&#x623;&#x64e;&#x633;&#x652;&#x62a;&#x64e;&#x63a;&#x652;&#x641;&#x650;&#x631;&#x64f; &#x627;&#x644;&#x644;&#x651;&#x64e;&#x647;&#x64e;">Astaghfirullah</option>
+        <option value="&#x635;&#x64e;&#x644;&#x651;&#x650; &#x627;&#x644;&#x644;&#x651;&#x64e;&#x647;&#x64f; &#x639;&#x64e;&#x644;&#x64e;&#x64a;&#x652;&#x647;&#x650; &#x648;&#x64e;&#x633;&#x64e;&#x644;&#x651;&#x64e;&#x645;&#x64e;">Selawat</option>
+      </select>
+    </div>
+  </div>
 </div>
 </div><!-- /main -->
 
@@ -486,12 +535,12 @@ const P=[
 {w:9,sub:"Subhanallahil Azimi Wabihamdihi",pg:"100x",t:"z",tg:100,ar:"\u0633\u064f\u0628\u0652\u062d\u064e\u0627\u0646\u064e \u0627\u0644\u0644\u0651\u064e\u0647\u0650 \u0627\u0644\u0652\u0639\u064e\u0638\u0650\u064a\u0652\u0645\u0650 \u0648\u064e\u0628\u0650\u062d\u064e\u0645\u0652\u062f\u0650\u0647\u0650",my:"Maha Suci Allah yang Maha Besar dan dengan kepujiannya."},
 {w:10,sub:"Selawat Ahmad Ibn Idris",pg:"100x",t:"z",tg:100,ar:"\u0627\u064e\u0644\u0644\u0651\u064e\u0647\u064f\u0645\u0651\u064e \u0635\u064e\u0644\u0651\u0650 \u0648\u064e\u0633\u064e\u0644\u0651\u0650\u0645\u0652 \u0648\u064e\u0628\u064e\u0627\u0631\u0650\u0643\u0652 \u0639\u064e\u0644\u064e\u0649 \u0645\u064e\u0648\u0652\u0644\u064e\u0627\u0646\u064e\u0627 \u0645\u064f\u062d\u064e\u0645\u0651\u064e\u062f\u064d\n\u0648\u064e\u0639\u064e\u0644\u064e\u0649 \u0622\u0644\u0650\u0647\u0650 \u0641\u0650\u064a\u0652 \u0643\u064f\u0644\u0651\u0650 \u0644\u064e\u0645\u0652\u062d\u064e\u0629\u064d \u0648\u064e\u0646\u064e\u0641\u064e\u0633\u064d\n\u0639\u064e\u062f\u064e\u062f\u064e\u0645\u064e\u0627 \u0648\u064e\u0633\u0650\u0639\u064e\u0647\u064f \u0639\u0650\u0644\u0652\u0645\u064f \u0627\u0644\u0644\u0651\u064e\u0647\u0650",my:"Hai Tuhanku, beri rahmat dan beri selamat dan beri berkat atas tuan kami Nabi Muhammad,\ndan atas ahlinya, pada tiap-tiap pandangan mata dan nafas,\nsebilang-bilang barang yang meliputi akan dia oleh ilmu Allah."},
 {w:11,sub:"Tahlil Khusus",pg:"100x",t:"z",tg:100,ar:"\u0644\u064e\u0627 \u0625\u0650\u0644\u064e\u0647\u064e \u0625\u0650\u0644\u0651\u064e\u0627 \u0627\u0644\u0644\u0651\u064e\u0647\u064f \u0645\u064f\u062d\u064e\u0645\u0651\u064e\u062f\u064c \u0631\u064e\u0633\u064f\u0648\u0652\u0644\u064f \u0627\u0644\u0644\u0651\u064e\u0647\u0650\n\u0641\u0650\u064a\u0652 \u0643\u064f\u0644\u0651\u0650 \u0644\u064e\u0645\u0652\u062d\u064e\u0629\u064d \u0648\u064e\u0646\u064e\u0641\u064e\u0633\u064d\n\u0639\u064e\u062f\u064e\u062f\u064e\u0645\u064e\u0627 \u0648\u064e\u0633\u0650\u0639\u064e\u0647\u064f \u0639\u0650\u0644\u0652\u0645\u064f \u0627\u0644\u0644\u0651\u064e\u0647\u0650",my:"Tiada Tuhan melainkan Allah, Nabi Muhammad pesuruh Allah,\npada tiap-tiap kerlipan mata dan nafas,\nsebilang-bilang barang yang meliputi akan dia oleh ilmu Allah."},
-{w:12,sub:"Istighfar Kabir",pg:"100x",t:"z",tg:100,ar:"\u0623\u064e\u0633\u0652\u062a\u064e\u063a\u0652\u0641\u0650\u0631\u064f \u0627\u0644\u0644\u0651\u064e\u0647\u064e \u0627\u0644\u0652\u0639\u064e\u0638\u0650\u064a\u0652\u0645\u064e \u0627\u0644\u0651\u064e\u0630\u0650\u064a\u0652 \u0644\u064e\u0627 \u0625\u0650\u0644\u064e\u0647\u064e \u0625\u0650\u0644\u0651\u064e\u0627 \u0647\u064f\u0648\u064e \u0627\u0644\u0652\u062d\u064e\u064a\u0651\u064f \u0627\u0644\u0652\u0642\u064e\u064a\u0651\u064f\u0648\u0645\u064f\n\u063a\u064e\u0641\u0651\u064e\u0627\u0631\u064e \u0627\u0644\u0630\u0651\u064f\u0646\u064f\u0648\u0652\u0628\u0650 \u0630\u064e\u0627 \u0627\u0644\u0652\u062c\u064e\u0644\u064e\u0627\u0644\u0650 \u0648\u064e\u0627\u0644\u0652\u0625\u0650\u0643\u0652\u0631\u064e\u0627\u0645\u0650 \u0648\u064e\u0623\u064e\u062a\u064f\u0648\u0652\u0628\u064f \u0625\u0650\u0644\u064e\u064a\u0652\u0647\u0650\n\u0645\u0650\u0646\u0652 \u062c\u064e\u0645\u0650\u064a\u0652\u0639\u0650 \u0627\u0644\u0652\u0645\u064e\u0639\u064e\u0627\u0635\u0650\u064a\u0652 \u0643\u064f\u0644\u0651\u0650\u0647\u064e\u0627 \u0648\u064e\u0627\u0644\u0630\u0651\u064f\u0646\u064f\u0648\u0652\u0628\u0650 \u0648\u064e\u0627\u0644\u0652\u0622\u062b\u064e\u0627\u0645\u0650\n\u0648\u064e\u0645\u0650\u0646\u0652 \u0643\u064f\u0644\u0651\u0650 \u0630\u064e\u0646\u0652\u0628\u064d \u0627\u0630\u0652\u0646\u064e\u0628\u0652\u062a\u064f\u0647\u064f \u0639\u064e\u0645\u0652\u062f\u064b\u0627 \u0648\u064e\u062e\u064e\u0637\u064e\u0623\u064b\n\u0638\u064e\u0627\u0647\u0650\u0631\u064b\u0627 \u0648\u064e\u0628\u064e\u0627\u0637\u0650\u0646\u064b\u0627 \u0642\u064e\u0648\u0652\u0644\u064b\u0627 \u0648\u064e\u0641\u0650\u0639\u0652\u0644\u064b\u0627",my:"Aku minta ampun akan Allah, Tuhan yang Maha Agung, yang tiada Tuhan melainkan Dia,\nlagi mengampuni segala dosa, yang mempunyai kebesaran dan kemuliaan, dan aku taubat kepada-Nya,\nDaripada sekalian maksiat sekaliannya dan segala dosa,\nDan daripada tiap-tiap dosa yang mendosa aku akan Dia dengan sengaja dan tersalah,\nPada zahir dan batin, perkataan dan perbuatan."},
+{w:12,sub:"Istighfar Kabir",pg:"3x",t:"z",tg:3,ar:"\u0623\u064e\u0633\u0652\u062a\u064e\u063a\u0652\u0641\u0650\u0631\u064f \u0627\u0644\u0644\u0651\u064e\u0647\u064e \u0627\u0644\u0652\u0639\u064e\u0638\u0650\u064a\u0652\u0645\u064e \u0627\u0644\u0651\u064e\u0630\u0650\u064a\u0652 \u0644\u064e\u0627 \u0625\u0650\u0644\u064e\u0647\u064e \u0625\u0650\u0644\u0651\u064e\u0627 \u0647\u064f\u0648\u064e \u0627\u0644\u0652\u062d\u064e\u064a\u0651\u064f \u0627\u0644\u0652\u0642\u064e\u064a\u0651\u064f\u0648\u0645\u064f\n\u063a\u064e\u0641\u0651\u064e\u0627\u0631\u064e \u0627\u0644\u0630\u0651\u064f\u0646\u064f\u0648\u0652\u0628\u0650 \u0630\u064e\u0627 \u0627\u0644\u0652\u062c\u064e\u0644\u064e\u0627\u0644\u0650 \u0648\u064e\u0627\u0644\u0652\u0625\u0650\u0643\u0652\u0631\u064e\u0627\u0645\u0650 \u0648\u064e\u0623\u064e\u062a\u064f\u0648\u0652\u0628\u064f \u0625\u0650\u0644\u064e\u064a\u0652\u0647\u0650\n\u0645\u0650\u0646\u0652 \u062c\u064e\u0645\u0650\u064a\u0652\u0639\u0650 \u0627\u0644\u0652\u0645\u064e\u0639\u064e\u0627\u0635\u0650\u064a\u0652 \u0643\u064f\u0644\u0651\u0650\u0647\u064e\u0627 \u0648\u064e\u0627\u0644\u0630\u0651\u064f\u0646\u064f\u0648\u0652\u0628\u0650 \u0648\u064e\u0627\u0644\u0652\u0622\u062b\u064e\u0627\u0645\u0650\n\u0648\u064e\u0645\u0650\u0646\u0652 \u0643\u064f\u0644\u0651\u0650 \u0630\u064e\u0646\u0652\u0628\u064d \u0627\u0630\u0652\u0646\u064e\u0628\u0652\u062a\u064f\u0647\u064f \u0639\u064e\u0645\u0652\u062f\u064b\u0627 \u0648\u064e\u062e\u064e\u0637\u064e\u0623\u064b\n\u0638\u064e\u0627\u0647\u0650\u0631\u064b\u0627 \u0648\u064e\u0628\u064e\u0627\u0637\u0650\u0646\u064b\u0627 \u0642\u064e\u0648\u0652\u0644\u064b\u0627 \u0648\u064e\u0641\u0650\u0639\u0652\u0644\u064b\u0627",my:"Aku minta ampun akan Allah, Tuhan yang Maha Agung, yang tiada Tuhan melainkan Dia,\nlagi mengampuni segala dosa, yang mempunyai kebesaran dan kemuliaan, dan aku taubat kepada-Nya,\nDaripada sekalian maksiat sekaliannya dan segala dosa,\nDan daripada tiap-tiap dosa yang mendosa aku akan Dia dengan sengaja dan tersalah,\nPada zahir dan batin, perkataan dan perbuatan."},
 {w:13,sub:"Kaffaratul Majlis",pg:"3x",t:"z",tg:3,ar:"\u0633\u064f\u0628\u0652\u062d\u064e\u0627\u0646\u064e\u0643\u064e \u0627\u0644\u0644\u0651\u064e\u0647\u064f\u0645\u0651\u064e \u0648\u064e\u0628\u0650\u062d\u064e\u0645\u0652\u062f\u0650\u0643\u064e\n\u0623\u064e\u0634\u0652\u0647\u064e\u062f\u064f \u0623\u064e\u0646\u0652 \u0644\u064e\u0627 \u0625\u0650\u0644\u064e\u0647\u064e \u0625\u0650\u0644\u0651\u064e\u0627 \u0623\u064e\u0646\u0652\u062a\u064e\n\u0623\u064e\u0633\u0652\u062a\u064e\u063a\u0652\u0641\u0650\u0631\u064f\u0643\u064e \u0648\u064e\u0623\u064e\u062a\u064f\u0648\u0652\u0628\u064f \u0625\u0650\u0644\u064e\u064a\u0652\u0643\u064e\n\u0639\u064e\u0645\u0650\u0644\u0652\u062a\u064f \u0633\u064f\u0648\u0652\u0621\u064b\u0627 \u0648\u064e\u0638\u064e\u0644\u064e\u0645\u0652\u062a\u064f \u0646\u064e\u0641\u0652\u0633\u0650\u064a\u0652\n\u0641\u064e\u0627\u063a\u0652\u0641\u0650\u0631\u0652\u0644\u0650\u064a\u0652 \u0641\u064e\u0625\u0650\u0646\u0651\u064e\u0647\u064f \u0644\u064e\u0627 \u064a\u064e\u063a\u0652\u0641\u0650\u0631\u064f \u0627\u0644\u0630\u0651\u064f\u0646\u064f\u0648\u0652\u0628\u064e \u0625\u0650\u0644\u0651\u064e\u0627 \u0623\u064e\u0646\u0652\u062a\u064e\n\u0633\u064f\u0628\u0652\u062d\u064e\u0627\u0646\u064e \u0631\u064e\u0628\u0651\u0650\u0643\u064e \u0631\u064e\u0628\u0651\u0650 \u0627\u0644\u0652\u0639\u0650\u0632\u0651\u064e\u0629\u0650 \u0639\u064e\u0645\u0651\u064e\u0627 \u064a\u064e\u0635\u0650\u0641\u064f\u0648\u0646\u064e\n\u0648\u064e\u0633\u064e\u0644\u064e\u0627\u0645\u064c \u0639\u064e\u0644\u064e\u0649 \u0627\u0644\u0652\u0645\u064f\u0631\u0652\u0633\u064e\u0644\u0650\u064a\u0652\u0646\u064e\n\u0648\u064e\u0627\u0644\u0652\u062d\u064e\u0645\u0652\u062f\u064f \u0644\u0650\u0644\u0651\u064e\u0647\u0650 \u0631\u064e\u0628\u0651\u0650 \u0627\u0644\u0652\u0639\u064e\u0627\u0644\u064e\u0645\u0650\u064a\u0652\u0646\u064e",my:"Maha Suci Engkau, Hai Tuhanku dan dengan kepujian Engkau.\nAku naik saksi tiada Tuhan melainkan Engkau.\nAku minta ampun akan di-Kau dan aku taubat kepada Engkau.\nTelah aku mengerjakan kejahatan, dan aku buat zalim akan diriku.\nMaka ampun oleh-Mu bagiku, tidak dapat mengampuni segala dosa melainkan Engkau.\nMaha Suci Tuhan yang mempunyai kekuatan daripada barang yang mereka sifatkan.\nDan salam atas segala Rasul.\nDan kepujian itu bagi Allah, Tuhan sekalian alam."}
 ];
 
 const OBS=[
-{svg:'<svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',t:'Selamat Datang ke Wirid 700',s:'App zikir & mujahadah untuk ahli\nSri Gayung Panglima Ulung.\nTeks Arab berbaris dengan fon Amiri\ndan terjemahan Melayu lengkap.',btn:'Seterusnya \u2192'},
+{svg:'<svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',t:'Selamat Datang ke Wirid 700',s:'App zikir & mujahadah untuk ahli\nSri Gayong Panglima Ulung.\nTeks Arab berbaris dengan fon Amiri\ndan terjemahan Melayu lengkap.',btn:'Seterusnya \u2192'},
 {svg:'<svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',t:'Waktu Sidang Ditetapkan',s:'<b>Sidang Pagi:</b> Selepas Subuh hingga 12:00 PM\n<b>Sidang Petang:</b> Selepas Asar hingga 12:00 AM\n\nApp akan kira waktu solat automatik\nberdasarkan lokasi anda.',btn:'Seterusnya \u2192'},
 {svg:'<svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',t:'Tracker 41 Hari Mujahadah',s:'Rekod kemajuan anda tersimpan dalam\ntelefon dan dihantar ke sistem guru.\nCapai streak 41 hari berturut-turut!',btn:'Mula Sekarang'}
 ];
@@ -689,12 +738,26 @@ function gT(n){
 
 // ─── STATS ────────────────────────────────────────
 function calc(){
+  const ss=localStorage.getItem('w700_start');
   let fl=0,se=0,st=0,go=true;
-  for(let i=1;i<=41;i++){const d=D[i]||{p:0,pt:0};if(d.p)se++;if(d.pt)se++;if(d.p&&d.pt){fl++;if(go)st++;}else go=false;}
+  const td=today();
+  const had=ss?td:41;
+  for(let i=1;i<=had;i++){
+    const d=D[i]||{p:0,pt:0};
+    if(d.p)se++;if(d.pt)se++;
+    if(d.p&&d.pt){fl++;if(go)st++;}
+    else if(i<td){go=false;}
+  }
   return{fl,se,st};
 }
-function today(){for(let i=1;i<=41;i++){if(!(D[i]&&D[i].p&&D[i].pt))return i;}return 41;}
-function rAll(){rHome();if(document.getElementById('s2').classList.contains('on'))r41();}
+function today(){
+  const ss=localStorage.getItem('w700_start');
+  if(!ss){for(let i=1;i<=41;i++){if(!(D[i]&&D[i].p&&D[i].pt))return i;}return 41;}
+  const s=new Date(ss),n=new Date();
+  s.setHours(0,0,0,0);n.setHours(0,0,0,0);
+  return Math.min(Math.max(1,Math.floor((n-s)/86400000)+1),41);
+}
+function rAll(){rHome();if(document.getElementById('s2').classList.contains('on'))r41();loadKitaran&&loadKitaran();}
 
 // ─── HOME ─────────────────────────────────────────
 function rHome(){
@@ -719,14 +782,13 @@ function stSes(s){ses=s;gT(1);document.getElementById('wpP').classList.toggle('a
 function pSes(s){ses=s;document.getElementById('wpP').classList.toggle('ak',s==='pagi');document.getElementById('wpPt').classList.toggle('ak',s==='petang');}
 
 function mW(){
-  // Time check (soft warn)
   const open=isOpen(ses);
   const w=document.getElementById('wtWarn');
   if(!open){
     const pt=PT||{fajr:5.5,asr:15.75};
     const openT=ses==='pagi'?d2t(pt.fajr):d2t(pt.asr);
     const closeT=ses==='pagi'?'12:00 PM':'12:00 AM';
-    w.innerHTML='\u26A0\uFE0F Sidang '+(ses==='pagi'?'Pagi':'Petang')+' dibuka selepas '+(ses==='pagi'?'Subuh ('+openT+')':'Asar ('+openT+')')+' sehingga '+closeT+'. Anda masih boleh meneruskan.';
+    w.innerHTML='\u26A0\uFE0F Di luar waktu '+(ses==='pagi'?'Pagi':'Petang')+'. Waktu sunat: '+(ses==='pagi'?'Subuh ('+openT+') – 12:00 PM':'Asar ('+openT+') – 12:00 AM')+'. Anda masih boleh teruskan.';
     w.style.display='block';
   } else {w.style.display='none';}
   // Check saved progress
@@ -787,7 +849,9 @@ function klrW(){saveProg();document.getElementById('wP').style.display='block';d
 
 function selesai(){
   const td=today();if(!D[td])D[td]={p:0,pt:0};
-  if(ses==='pagi')D[td].p=1;else D[td].pt=1;
+  const ds=new Date().toISOString().slice(0,10);
+  if(ses==='pagi'){D[td].p=1;D[td].pd=ds;}else{D[td].pt=1;D[td].ptd=ds;}
+  if(!localStorage.getItem('w700_start'))localStorage.setItem('w700_start',ds);
   sv();clearProg();
   const both=D[td].p&&D[td].pt;rAll();checkReminder();
   document.getElementById('dMsg').innerHTML=(ses==='pagi'?'Sidang Pagi':'Sidang Petang')+' Hari ke-'+td+' telah direkodkan.<br>'+(both?'<strong style="color:#6ee7b7">Kedua-dua sidang hari ini lengkap. MasyaAllah!</strong>':'Satu lagi sidang masih menanti.');
@@ -801,7 +865,11 @@ function selesai(){
 
 // ─── 41 HARI ──────────────────────────────────────
 function tg41(i,t){
-  if(!D[i])D[i]={p:0,pt:0};D[i][t]=D[i][t]?0:1;sv();
+  if(!D[i])D[i]={p:0,pt:0};
+  const ds2=new Date().toISOString().slice(0,10);
+  if(!D[i][t]){D[i][t]=1;if(t==='p')D[i].pd=ds2;else D[i].ptd=ds2;}else D[i][t]=0;
+  if(!localStorage.getItem('w700_start'))localStorage.setItem('w700_start',ds2);
+  sv();
   if(D[i].p&&D[i].pt)showToast('MasyaAllah! Hari ke-'+i+' lengkap!','#b45309');
   rAll();
 }
@@ -882,6 +950,44 @@ function jumpTo(w){
   const idx=P.findIndex(p=>p.w===w);
   if(idx>=0){pi=idx;cnt=0;adv=false;}
   hideNav();rW();
+}
+
+// ─── TASBIH BEBAS ─────────────────────────────────────────────
+let tsbCnt=0;
+function bukaTasbih(){document.getElementById('tsbOv').style.display='flex';}
+function tutupTasbih(){document.getElementById('tsbOv').style.display='none';}
+function tsbTap(){
+  tsbCnt++;
+  document.getElementById('tsbN').textContent=tsbCnt;
+  ting('biasa');
+  try{if(navigator.vibrate)navigator.vibrate(25);}catch(e){}
+}
+function tsbReset(){tsbCnt=0;document.getElementById('tsbN').textContent='0';}
+function tsbChg(){
+  document.getElementById('tsbZn').textContent=document.getElementById('tsbSel').value;
+}
+
+// ─── KITARAN MUJAHADAH ────────────────────────────────────────
+function loadKitaran(){
+  const k=parseInt(localStorage.getItem('w700_ktr')||'1');
+  document.getElementById('ktrN').textContent=k;
+  return k;
+}
+function kitaranBaru(){
+  const k=loadKitaran();
+  if(!confirm('Mulakan Mujahadah Kitaran ke-'+(k+1)+'?\n\nData kitaran '+ k +' akan disimpan dalam sejarah.'))return;
+  // Simpan sejarah kitaran
+  const hist=JSON.parse(localStorage.getItem('w700_hist')||'[]');
+  const{fl,se,st}=calc();
+  hist.push({ktr:k,fl,se,st,tarikh:new Date().toLocaleDateString('ms-MY')});
+  localStorage.setItem('w700_hist',JSON.stringify(hist));
+  // Reset untuk kitaran baru
+  D={};for(let i=1;i<=41;i++)D[i]={p:0,pt:0};
+  localStorage.setItem('w700_ktr',String(k+1));
+  localStorage.removeItem('w700_start');
+  localStorage.removeItem('w700_prog');
+  sv();rAll();loadKitaran();
+  showToast('Mujahadah Kitaran ke-'+(k+1)+' bermula. BismiLlah!','#2563eb');
 }
 // ─── AUDIO & VIBRATE ──────────────────────────────
 function ting(jenis='biasa'){
