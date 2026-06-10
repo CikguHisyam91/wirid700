@@ -191,6 +191,22 @@ body.flt{background:#f6f8fa!important;color:#111!important;}
 .sync-b svg{width:13px;height:13px;stroke:currentColor;}
 .sync-b.ok{border-color:var(--ce);color:var(--ce);}
 .sync-b.er{border-color:#ef4444;color:#ef4444;}
+
+/* ─── WIRID NAV PANEL ─── */
+.wnav{background:var(--b1);border-radius:10px;padding:12px;margin-bottom:10px;border:.5px solid var(--bd);}
+.wnav-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.wnav-ht{font-size:12px;font-weight:500;color:var(--t2);}
+.wnav-cl{background:none;border:none;color:var(--t2);cursor:pointer;font-size:18px;padding:0 4px;line-height:1;}
+.wnav-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+.wni{padding:9px 4px;border:.5px solid var(--bd);border-radius:7px;background:var(--b0);cursor:pointer;text-align:center;transition:all .15s;-webkit-tap-highlight-color:transparent;}
+.wni:active{transform:scale(.92);}
+.wni-n{font-size:12px;font-weight:700;color:var(--t2);}
+.wni-l{font-size:9px;color:var(--t2);margin-top:2px;line-height:1.2;}
+.wni.cur{background:var(--cn);border-color:var(--cg);}
+.wni.cur .wni-n,.wni.cur .wni-l{color:var(--cg);}
+.wni.don{background:rgba(5,150,105,.08);border-color:rgba(5,150,105,.3);}
+.wni.don .wni-n{color:var(--ce);}
+.wni.don .wni-l{color:rgba(5,150,105,.7);}
 .rstb{width:100%;margin-top:4px;padding:8px;border:.5px solid var(--bd);border-radius:8px;background:none;color:var(--t2);font-size:11px;cursor:pointer;}
 </style>
 </head>
@@ -345,7 +361,14 @@ body.flt{background:#f6f8fa!important;color:#111!important;}
     <div class="cnt-wr" id="cntW" style="display:none;"><div class="cnt-n" id="cntN">0</div><div class="cnt-t" id="cntT"></div></div>
     <button class="wact w-tp" id="wTap" onclick="tap()" style="display:none;">TEKAN UNTUK ZIKIR</button>
     <button class="wact w-nx" id="wNxt" onclick="nxP()" style="display:none;">Seterusnya &#x2192;</button>
-    <div class="wrow"><button class="wsm" onclick="ulg()">&#x21BA; Ulang</button><button class="wsm" onclick="klrW()">&#x2190; Keluar</button></div>
+    <div id="wNav" class="wnav" style="display:none;">
+      <div class="wnav-hd">
+        <span class="wnav-ht">Lompat ke Wirid</span>
+        <button class="wnav-cl" onclick="hideNav()">&#x2715;</button>
+      </div>
+      <div class="wnav-grid" id="wNavGrid"></div>
+    </div>
+    <div class="wrow"><button class="wsm" onclick="prevP()">&#x2190; Sebelum</button><button class="wsm" onclick="ulg()">&#x21BA; Ulang</button><button class="wsm" onclick="showNav()">&#x2630; Lompat</button><button class="wsm" onclick="klrW()">&#x2715; Keluar</button></div>
   </div>
   <div id="wD" style="display:none;">
     <div class="wdov">
@@ -704,7 +727,7 @@ function tap(){
   cnt++;document.getElementById('cntN').textContent=cnt;
   saveProg(); // Auto-save every tap
   const bt=document.getElementById('wTap');bt.classList.remove('pulse');void bt.offsetWidth;bt.classList.add('pulse');
-  if(cnt>=p.tg){adv=true;ting();vib();bt.className='wact w-dn';bt.textContent='SELESAI \u2713 \u2014 Beralih...';setTimeout(()=>{pi++;cnt=0;rW();},1800);}
+  if(cnt>=p.tg){adv=true;ting('selesai');vib();bt.className='wact w-dn';bt.textContent='SELESAI \u2713 \u2014 Beralih...';setTimeout(()=>{pi++;cnt=0;rW();},1800);}
 }
 function nxP(){pi++;cnt=0;saveProg();rW();}
 function ulg(){cnt=0;adv=false;rW();}
@@ -717,7 +740,7 @@ function selesai(){
   const both=D[td].p&&D[td].pt;rAll();checkReminder();
   document.getElementById('dMsg').innerHTML=(ses==='pagi'?'Sidang Pagi':'Sidang Petang')+' Hari ke-'+td+' telah direkodkan.<br>'+(both?'<strong style="color:#6ee7b7">Kedua-dua sidang hari ini lengkap. MasyaAllah!</strong>':'Satu lagi sidang masih menanti.');
   document.getElementById('wA').style.display='none';document.getElementById('wD').style.display='block';
-  ting();vib();
+  ting('sesi');vib();
   if(both)showToast('MasyaAllah! Hari ke-'+td+' \u2014 Kedua-dua sidang lengkap!','#b45309');
   else showToast((ses==='pagi'?'Sidang Pagi':'Sidang Petang')+' Hari ke-'+td+' direkodkan!');
   syncGAS('sync',{selesai:both||td>=41,gagal:false});
@@ -775,8 +798,72 @@ function rstAll(){
   rc=false;D={};for(let i=1;i<=41;i++)D[i]={p:0,pt:0};sv();clearProg();rAll();b.textContent='Padam semua data 41 hari';b.style.color='';
 }
 
+
+// ─── NAVIGASI WIRID ───────────────────────────────────────────
+function prevP(){
+  if(pi<=0){showToast('Ini wirid pertama.');return;}
+  pi--;cnt=0;adv=false;document.getElementById('wNav').style.display='none';rW();
+}
+function showNav(){
+  const wNums=[...new Set(P.map(p=>p.w))];
+  const curW=P[pi]?P[pi].w:0;
+  let h='';
+  wNums.forEach(w=>{
+    const fp=P.findIndex(p=>p.w===w);
+    const p=P[fp];
+    const done=fp<pi;const cur=P[pi]&&P[pi].w===w;
+    const lbl=p.sub.split(' ').slice(-2).join(' ');
+    h+='<div class="wni'+(cur?' cur':done?' don':'')+'" onclick="jumpTo('+w+')">';
+    h+='<div class="wni-n">W'+w+'</div>';
+    h+='<div class="wni-l">'+lbl+'</div></div>';
+  });
+  document.getElementById('wNavGrid').innerHTML=h;
+  document.getElementById('wNav').style.display='block';
+}
+function hideNav(){document.getElementById('wNav').style.display='none';}
+function jumpTo(w){
+  const idx=P.findIndex(p=>p.w===w);
+  if(idx>=0){pi=idx;cnt=0;adv=false;}
+  hideNav();rW();
+}
 // ─── AUDIO & VIBRATE ──────────────────────────────
-function ting(){if(muted)return;try{const c=new(window.AudioContext||window.webkitAudioContext)();const o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.type='sine';o.frequency.setValueAtTime(880,c.currentTime);o.frequency.exponentialRampToValueAtTime(1320,c.currentTime+0.12);o.frequency.exponentialRampToValueAtTime(1100,c.currentTime+0.5);g.gain.setValueAtTime(0.4,c.currentTime);g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+1.2);o.start();o.stop(c.currentTime+1.2);}catch(e){}}
+function ting(jenis='biasa'){
+  if(muted)return;
+  try{
+    const ctx=new(window.AudioContext||window.webkitAudioContext)();
+    function loceng(freq,t,dur,vol){
+      // Nada utama
+      const o=ctx.createOscillator(),g=ctx.createGain();
+      o.connect(g);g.connect(ctx.destination);
+      o.type='sine';o.frequency.setValueAtTime(freq,t);
+      o.frequency.exponentialRampToValueAtTime(freq*.97,t+dur);
+      g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+.008);
+      g.gain.exponentialRampToValueAtTime(.001,t+dur);
+      o.start(t);o.stop(t+dur+.05);
+      // Harmonik (bunyi loceng semula jadi)
+      const o2=ctx.createOscillator(),g2=ctx.createGain();
+      o2.connect(g2);g2.connect(ctx.destination);
+      o2.type='sine';o2.frequency.setValueAtTime(freq*2.76,t);
+      g2.gain.setValueAtTime(0,t);g2.gain.linearRampToValueAtTime(vol*.28,t+.006);
+      g2.gain.exponentialRampToValueAtTime(.001,t+dur*.55);
+      o2.start(t);o2.stop(t+dur);
+    }
+    const T=ctx.currentTime;
+    if(jenis==='biasa'){
+      // Satu loceng lembut — zikir selesai
+      loceng(880,T,1.5,.32);
+    } else if(jenis==='selesai'){
+      // Dua loceng naik — wirid 1 section selesai
+      loceng(880,T,1.2,.32);
+      loceng(1109,T+.22,1.3,.32);
+    } else if(jenis==='sesi'){
+      // Tiga loceng — sesi penuh selesai
+      loceng(880,T,1.0,.30);
+      loceng(1109,T+.18,1.0,.32);
+      loceng(1319,T+.36,2.0,.38);
+    }
+  }catch(e){}
+}
 function vib(){try{if(navigator.vibrate)navigator.vibrate([80,40,80,40,180]);}catch(e){}}
 
 // ─── START ────────────────────────────────────────
