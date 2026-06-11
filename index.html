@@ -660,7 +660,16 @@ function init(){
     document.getElementById('ob').style.display='block';
     document.getElementById('main').style.display='none';
     rOb(0);
-  } else {rAll();}
+  } else {
+    rAll();
+    setTimeout(function(){
+      var nm=localStorage.getItem('w700_nama');
+      if(nm){
+        syncGAS('daftar',{});
+        setTimeout(function(){syncGAS('sync',{selesai:false,gagal:false});},1200);
+      }
+    },2000);
+  }
 }
 
 // ─── DAFTAR ───────────────────────────────────────
@@ -948,6 +957,7 @@ function tg41(i,t){
   sv();
   if(D[i].p&&D[i].pt)showToast('MasyaAllah! Hari ke-'+i+' lengkap!','#b45309');
   rAll();
+  syncGAS('sync',{selesai:false,gagal:false});
 }
 function hmTap(i){const d=D[i]||{p:0,pt:0};document.getElementById('hmTp').textContent='Hari '+i+' \u2014 Pagi: '+(d.p?'\u2713 Selesai':'\u2717 Belum')+' \u00b7 Petang: '+(d.pt?'\u2713 Selesai':'\u2717 Belum');}
 function r41(){
@@ -978,14 +988,23 @@ async function syncGAS(action,extra){
   catch(e){return false;}
 }
 async function manualSync(){
-  const b=document.getElementById('syncB');
+  var b=document.getElementById('syncB');
   b.textContent='Menghantar...';b.disabled=true;
-  const ok=await syncGAS('sync',{selesai:false,gagal:false});
+  await syncGAS('daftar',{});
+  var ok=await syncGAS('sync',{selesai:false,gagal:false});
   b.disabled=false;
-  if(ok){b.className='sync-b ok';b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Berjaya dihantar!';}
-  else if(!SYNC_EN){b.className='sync-b er';b.innerHTML='Perlu isi GAS_URL dahulu';}
-  else{b.className='sync-b er';b.innerHTML='Gagal \u2014 cuba semula';}
-  setTimeout(()=>{b.className='sync-b';b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> Hantar ke sistem guru';},3000);
+  if(ok){
+    b.className='sync-b ok';
+    b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Berjaya!';
+    showToast('Data berjaya dihantar ke sistem guru!');
+  } else {
+    b.className='sync-b er';
+    b.innerHTML='Gagal — cuba semula';
+  }
+  setTimeout(function(){
+    b.className='sync-b';
+    b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> Hantar ke sistem guru';
+  },3000);
 }
 
 function rstAll(){
@@ -1214,6 +1233,11 @@ function vib(){try{if(navigator.vibrate)navigator.vibrate([80,40,80,40,180]);}ca
 // ─── START ────────────────────────────────────────
 init();
 if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});}
+// Auto-sync setiap 5 minit
+setInterval(function(){
+  var nm=localStorage.getItem('w700_nama');
+  if(nm)syncGAS('sync',{selesai:false,gagal:false});
+},300000);
 </script>
 </body>
 </html>
