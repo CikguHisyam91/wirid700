@@ -116,7 +116,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 </div>
 <div class="adm-toast" id="admToast"></div>
 <script>
-const GAS_URL='https://script.google.com/macros/s/AKfycbzy8xPKMMLWsoOKx8D7RIVdNUyFI8GZffLr5WCnMPGk7Lluu3UfHOIbU5fWtBirg2nK/exec';
+const GAS_URL='https://script.google.com/macros/s/AKfycbwCTSqRSXdeFHObWUSz1WWEIqu88YS46ej-O7NgHcU3UadBfvmSCWkjuzsPsaQFdwQd/exec';
 const PIN='4170';
 var DATA=[],FILTER='all';
 
@@ -137,12 +137,24 @@ document.getElementById('pin').addEventListener('keyup',function(e){if(e.key==='
 async function muat(){
   var b=document.getElementById('rfB');b.classList.add('spin');
   try{
-    var r=await fetch(GAS_URL);
-    DATA=await r.json();
+    var r=await fetch(GAS_URL+'?t='+Date.now(),{
+      method:'GET',
+      credentials:'omit',
+      redirect:'follow'
+    });
+    var txt=await r.text();
+    try{DATA=JSON.parse(txt);}
+    catch(je){DATA=[];}
+    if(!Array.isArray(DATA))DATA=[];
     render();
     document.getElementById('lup').textContent='Kemaskini: '+new Date().toLocaleTimeString('ms-MY');
   }catch(e){
-    document.getElementById('ls').innerHTML='<div class="empty">Gagal memuat data.<br>Semak sambungan internet.</div>';
+    document.getElementById('ls').innerHTML='<div class="empty" style="text-align:left;line-height:2"><b style="color:#f87171">Gagal sambung ke Google Sheet.</b><br><br>'+
+      '&#x2022; Pastikan GAS dah deploy sebagai <b>Web App</b><br>'+
+      '&#x2022; <b>Execute as:</b> Me<br>'+
+      '&#x2022; <b>Who has access:</b> Anyone<br><br>'+
+      '<a href="'+GAS_URL+'" target="_blank" style="color:#d4af37">&#x2794; Klik untuk test URL GAS</a><br><br>'+
+      '<small style="color:#6a88a6">Jika terbuka JSON dalam tab baru = GAS OK,<br>masalah mungkin deployment settings.</small></div>';
   }
   b.classList.remove('spin');
 }
