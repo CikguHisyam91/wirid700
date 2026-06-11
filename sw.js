@@ -1,4 +1,4 @@
-const CACHE = 'w700-v7';
+const CACHE = 'w700-v8';
 const STATIC = [
   './', './index.html', './manifest.json', './icon.svg',
   'https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap',
