@@ -291,6 +291,21 @@ body.flt{background:#f6f8fa!important;color:#111!important;}
 .log-item{padding:9px 14px;border-top:.5px solid var(--bd);display:flex;justify-content:space-between;align-items:center;}
 .log-ses{font-size:12px;color:var(--tx);font-weight:500;}
 .log-inf{font-size:10px;color:var(--t2);text-align:right;}
+
+/* -- MODE SELECTOR -- */
+.mode-row{display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap;}
+.mode-b{flex:1;min-width:70px;padding:9px 4px;border:.5px solid var(--bd);border-radius:8px;background:var(--b0);color:var(--t2);font-size:10px;font-weight:500;cursor:pointer;text-align:center;transition:all .15s;line-height:1.4;}
+.mode-b.ak{background:var(--cn);color:var(--cg);border-color:var(--cg);}
+.mode-b .mode-n{font-size:12px;font-weight:700;display:block;}
+.mode-b .mode-d{font-size:9px;opacity:.7;display:block;margin-top:2px;}
+/* -- CUSTOM CONFIG -- */
+.ct-cfg{background:var(--b1);border-radius:10px;padding:12px;margin-bottom:12px;border:.5px solid rgba(212,175,55,.25);}
+.ct-hd{font-size:12px;color:var(--cg);font-weight:500;margin-bottom:10px;}
+.ct-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.ct-lbl{font-size:12px;color:var(--tx);}
+.ct-in{width:90px;padding:7px 10px;border:.5px solid var(--bd);border-radius:7px;background:var(--b0);color:var(--tx);font-size:14px;text-align:center;outline:none;}
+.ct-in:focus{border-color:var(--cg);}
+.ct-sv{width:100%;padding:10px;background:var(--cg);color:var(--cn);border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;margin-top:4px;}
 .rstb{width:100%;margin-top:4px;padding:8px;border:.5px solid var(--bd);border-radius:8px;background:none;color:var(--t2);font-size:11px;cursor:pointer;}
 </style>
 </head>
@@ -420,6 +435,31 @@ body.flt{background:#f6f8fa!important;color:#111!important;}
 <div class="sc" id="s1">
   <div id="wP">
     <div class="wpl">
+      <div class="mode-row">
+        <button class="mode-b ak" id="mb0" onclick="setMode('w700')">
+          <span class="mode-n">Wirid 700</span>
+          <span class="mode-d">Lengkap 14</span>
+        </button>
+        <button class="mode-b" id="mb1" onclick="setMode('w100')">
+          <span class="mode-n">100, 3, 3</span>
+          <span class="mode-d">Ringkas</span>
+        </button>
+        <button class="mode-b" id="mb2" onclick="setMode('qiam')">
+          <span class="mode-n">Qiamullail</span>
+          <span class="mode-d">1000x</span>
+        </button>
+        <button class="mode-b" id="mb3" onclick="setMode('custom')">
+          <span class="mode-n">Custom</span>
+          <span class="mode-d">Pilih sendiri</span>
+        </button>
+      </div>
+      <div class="ct-cfg" id="ctCfg" style="display:none;">
+        <div class="ct-hd">Tetapan kiraan wirid custom</div>
+        <div class="ct-row"><span class="ct-lbl">Tahlil Khusus</span><input type="number" id="ctT" class="ct-in" value="100" min="1"></div>
+        <div class="ct-row"><span class="ct-lbl">Selawat Azimiah</span><input type="number" id="ctA" class="ct-in" value="3" min="1"></div>
+        <div class="ct-row"><span class="ct-lbl">Istighfar Kabir</span><input type="number" id="ctI" class="ct-in" value="3" min="1"></div>
+        <button class="ct-sv" onclick="saveCustom()">Simpan &amp; Guna</button>
+      </div>
       <div class="wpl-l">Pilih sidang untuk bermula</div>
       <div id="wtWarn" class="wtime-warn"></div>
       <div class="wpl-r">
@@ -905,10 +945,12 @@ function loadProg(){
 function clearProg(){try{localStorage.removeItem('w700_prog');}catch(e){}}
 
 function rW(){
-  if(pi>=P.length){selesai();return;}
-  const p=P[pi];adv=false;
-  document.getElementById('wPF').style.width=Math.round(pi/P.length*100)+'%';
-  document.getElementById('wPL').textContent='Wirid '+p.w+' / 14';
+  var _cp=getCP();
+  if(pi>=_cp.length){selesai();return;}
+  const p=_cp[pi];adv=false;
+  document.getElementById('wPF').style.width=Math.round(pi/getCP().length*100)+'%';
+  var _tot=new Set(getCP().map(function(x){return x.w;})).size;
+  document.getElementById('wPL').textContent='Wirid '+p.w+' / '+_tot;
   document.getElementById('wSL').textContent=ses==='pagi'?'Sidang Pagi':'Sidang Petang';
   const bd=document.getElementById('wBdg');bd.textContent='Wirid '+p.w+' \u2014 '+p.pg;bd.className='w-bdg '+(p.t==='b'?'bc':'zk');
   document.getElementById('wSub').textContent=p.sub;
@@ -922,7 +964,7 @@ function rW(){
   if(iz){document.getElementById('cntN').textContent=cnt;document.getElementById('cntT').textContent='/ '+p.tg+'x';const bt=document.getElementById('wTap');bt.className='wact w-tp';bt.textContent='TEKAN UNTUK ZIKIR';}
 }
 function tap(){
-  if(adv)return;const p=P[pi];if(p.t!=='z'||cnt>=p.tg)return;
+  if(adv)return;var _cpt=getCP();const p=_cpt[pi];if(p.t!=='z'||cnt>=p.tg)return;
   cnt++;document.getElementById('cntN').textContent=cnt;
   saveProg(); // Auto-save every tap
   const bt=document.getElementById('wTap');bt.classList.remove('pulse');void bt.offsetWidth;bt.classList.add('pulse');
@@ -1029,7 +1071,7 @@ function showNav(){
   const curW=P[pi]?P[pi].w:0;
   let h='';
   wNums.forEach(w=>{
-    const fp=P.findIndex(p=>p.w===w);
+    const fp=getCP().findIndex(function(p){return p.w===w;});
     const p=P[fp];
     const done=fp<pi;const cur=P[pi]&&P[pi].w===w;
     const lbl=p.sub.split(' ').slice(-2).join(' ');
@@ -1042,7 +1084,7 @@ function showNav(){
 }
 function hideNav(){document.getElementById('wNav').style.display='none';}
 function jumpTo(w){
-  const idx=P.findIndex(p=>p.w===w);
+  const idx=getCP().findIndex(function(p){return p.w===w;});
   if(idx>=0){pi=idx;cnt=0;adv=false;}
   hideNav();rW();
 }
@@ -1085,6 +1127,50 @@ function kitaranBaru(){
   showToast('Mujahadah Kitaran ke-'+(k+1)+' bermula. BismiLlah!','#2563eb');
 }
 
+
+// --- JENIS WIRID ---
+var currentMode='w700';
+var CP=null; // Current Pages — null = guna P
+
+function getCP(){return CP||P;}
+
+function setMode(m){
+  currentMode=m;
+  ['w700','w100','qiam','custom'].forEach(function(k,i){
+    document.getElementById('mb'+i).classList.toggle('ak',k===m);
+  });
+  document.getElementById('ctCfg').style.display=m==='custom'?'block':'none';
+  if(m!=='custom')buildCP(m);
+}
+
+function buildCP(m){
+  // 8 halaman pertama sama untuk semua mod (Fatihah group s/d Istighfar)
+  var common=P.slice(0,8).map(function(p){return Object.assign({},p);});
+  if(m==='w700'){CP=null;return;}
+  var tahlilK=Object.assign({},P.find(function(p){return p.sub==='Tahlil Khusus';}));
+  var azimiah=Object.assign({},P.find(function(p){return p.sub==='Selawat Azimiah';}));
+  var istKabir=Object.assign({},P.find(function(p){return p.sub==='Istighfar Kabir';}));
+  var kaffaratul=Object.assign({},P.find(function(p){return p.sub==='Kaffaratul Majlis';}));
+  var counts={tahlil:100,azimiah:3,istigfar:3};
+  if(m==='qiam')counts={tahlil:1000,azimiah:50,istigfar:50};
+  else if(m==='custom'){
+    try{counts=JSON.parse(localStorage.getItem('w700_custom')||'{"tahlil":100,"azimiah":3,"istigfar":3}');}catch(e){}
+  }
+  tahlilK.w=5;tahlilK.tg=counts.tahlil;tahlilK.pg=counts.tahlil+'x';
+  azimiah.w=6;azimiah.tg=counts.azimiah;azimiah.pg=counts.azimiah+'x';
+  istKabir.w=7;istKabir.tg=counts.istigfar;istKabir.pg=counts.istigfar+'x';
+  kaffaratul.w=8;
+  CP=[].concat(common,[tahlilK,azimiah,istKabir,kaffaratul]);
+}
+
+function saveCustom(){
+  var t=parseInt(document.getElementById('ctT').value)||100;
+  var a=parseInt(document.getElementById('ctA').value)||3;
+  var ig=parseInt(document.getElementById('ctI').value)||3;
+  localStorage.setItem('w700_custom',JSON.stringify({tahlil:t,azimiah:a,istigfar:ig}));
+  buildCP('custom');
+  showToast('Tetapan custom disimpan. Mula Wirid sekarang.');
+}
 // --- WAKE LOCK ---
 var _wl=null;
 async function reqWL(){try{if('wakeLock' in navigator){_wl=await navigator.wakeLock.request('screen');}}catch(e){}}
