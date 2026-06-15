@@ -1,4 +1,4 @@
-const CACHE = 'w700-v12';
+const CACHE = 'w700-v14';
 const STATIC = [
   './', './index.html', './manifest.json', './icon.svg',
   'https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap',
@@ -21,7 +21,6 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
   const url = e.request.url;
-  // Network-first for GAS requests
   if (url.includes('script.google.com')) return;
   e.respondWith(
     caches.match(e.request).then(cached => {
@@ -36,7 +35,6 @@ self.addEventListener('fetch', e => {
   );
 });
 
-// Show notification from app
 self.addEventListener('message', e => {
   if (e.data && e.data.type === 'NOTIFY') {
     self.registration.showNotification(e.data.title, {
